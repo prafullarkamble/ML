@@ -1,0 +1,16 @@
+df = read_csv('customers.csv')
+
+select * from customers;
+df
+
+select custID from customers LIMIT 7;
+df.head(7)
+
+select custID from df where Transaction_Dollars = 397; 
+df[df.Transaction_Dollars == 397].CustID
+
+select ... where Transaction_Dollars < 397 AND Product_Count <=10;
+df[(df.Transaction_Dollars < 397) & (df.Product_Count <=10)]
+
+select CustID, Transaction_Dollars ... where Transaction_Dollars >= 250 AND Product_Count > 16;
+df[(df.Transaction_Dollars >= 250) & (df.Product_Count > 16)][["CustID", "Transaction_Dollars"]]
