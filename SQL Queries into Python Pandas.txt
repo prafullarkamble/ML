@@ -14,3 +14,12 @@ df[(df.Transaction_Dollars < 397) & (df.Product_Count <=10)]
 
 select CustID, Transaction_Dollars ... where Transaction_Dollars >= 250 AND Product_Count > 16;
 df[(df.Transaction_Dollars >= 250) & (df.Product_Count > 16)][["CustID", "Transaction_Dollars"]]
+
+select max(age), min(age), mean(age) from customers;
+df.agg({
+'Age': [''max', 'min', 'mean']
+  })
+  
+  select DISTINCT username from customers;
+  df.username.unique()
+  
