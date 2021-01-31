@@ -23,3 +23,20 @@ df.agg({
   select DISTINCT username from customers;
   df.username.unique()
   
+select * from customers where Age >= 40 order by custID;
+df[df.Age >= 40].sort_values('custID')
+df[df.Age >= 40].sort_values('custID', ascending=False)
+df[df.Age >= 50].sort_values('Spending_Score_1_to_100')[['Age', 'CustomerID','Annual_Income_K_Dollars']]
+
+select Age, Genre, count(*) from customers group by Genre, Age;
+df.groupby(['Age', 'Genre']).size().to_frame('Count')  # to_frame('Count') to give a name to the count column(1,2,3,4,...) 
+df.groupby(['Age', 'Genre']).size().to_frame('Count').reset_index()
+## Sort values
+df.groupby(['Age', 'Genre']).size().to_frame('COUNT').sort_values('Genre') 
+
+select Age, count(*) from customers groupby Age having count(*) < 3;
+df.groupby(['Age']).filter(lambda g: len(g) < 3).groupby('Age').size()  ## having count(*) < 3 == lambda g: len(g) < 3
+
+
+
+
