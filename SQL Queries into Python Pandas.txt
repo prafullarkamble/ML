@@ -39,4 +39,36 @@ df.groupby(['Age']).filter(lambda g: len(g) < 3).groupby('Age').size()  ## havin
 
 
 
+select * from customers where Age in (11,22,55,44)
+df[df.Age.isin([22,33,44])]
+df[df.Age.isin([22,33,44])][['Genre', 'Age', "Annual_Income_K_Dollars"]]
+
+select * from customers where Age not in (11,22,55,44)
+df[~df.Age.isin([22,33,44])][['Genre', 'Age', "Annual_Income_K_Dollars"]]
+
+select * from customers order by Age desc limit 10;
+df.nlargest(10, columns='Age')
+
+select * from customers order by Age desc limit 10 offset 10;
+df.nlargest(10, columns='Age').tail(10)
+
+file2 = "Shop_Customers.csv";filename2 = path + file2;df2 = pd.read_csv(filename2);df2
+
+select * from customers where Annual_Income_K_Dollars > 50 union all select * from shop_customers  where Annual_Income_K_Dollars < 45;
+pd.concat([df[df.Annual_Income_K_Dollars > 50], df2[df2.Annual_Income_K_Dollars < 45]])
+pd.concat([df[df.Annual_Income_K_Dollars > 50], df2[df2.Annual_Income_K_Dollars < 45]]).drop_duplicates()
+
+select * from customers c join transactions t on c.CustomerID = t.CustID where c.Genre = Female
+df.merge(df3[df.Genre == 'Female'],left_on='CustomerID', right_on='CustID',how='inner')
+
+insert into customers values(111, 23, 'QWERTY');
+cust = df.append(custmerID=123123,Genre='Male',Age=33);
+
+update customers set CustomerID = 000 where sales>=10;
+df.loc.df['Sales'] == 10, CustomerID' == 000;  
+
+delete from customers where Age = 7
+df.drop(df[df.Age = 7].index)
+
+
 
